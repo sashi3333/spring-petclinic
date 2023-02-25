@@ -2,7 +2,7 @@ pipeline{
     agent any
     parameters{
         choice(name:'BRANCH_TO_BUILD', choices: ['main', 'REL_INT_1.0'], description: 'Branch to build')
-        string(name:'MAVEN_GOAL', defaultValue: 'package', description: 'Maven goals')
+        string(name:'MAVEN_GOAL', defaultValue: 'package', description: 'maven goal')
     }
 
     stages{
