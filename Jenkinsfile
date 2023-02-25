@@ -9,7 +9,7 @@ pipeline{
         stage('vcs'){
             steps {
                 git branch: '${params.BRANCH_TO_BUILD}',
-                url: 'https://github.com/sashi3333/spring-petclinic.git'
+                    url: 'https://github.com/sashi3333/spring-petclinic.git'
             }
         }
         stage('build'){
