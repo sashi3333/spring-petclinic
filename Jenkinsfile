@@ -2,6 +2,7 @@ pipeline{
     agent any
     parameters{
         choice(name:'BRANCH_TO_BUILD', choices: ['main', 'REL_INT_1.0'], description: 'Branch to build')
+        string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven goal')
         
     }
 
@@ -14,7 +15,7 @@ pipeline{
         }
         stage('build'){
             steps{
-                sh "/usr/share/maven/bin/mvn package"
+                sh "/opt/apache-maven-3.9.0/bin/mvn $(params.MAVEN_GOAL)"
             }
         }
         stage('archive results'){
