@@ -5,12 +5,12 @@ pipeline{
         string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven goal')
         
     }
-    
+
     stages{
         stage('vcs'){
             steps {
                 mail subject: "Build Started for Jenkins JOB $env.JOB_NAME", 
-                    body: "Build started for jJenkins JOB $env.JOB_NAME",
+                    body: "Build started for Jenkins JOB $env.JOB_NAME",
                     to: 'sashidhar3333@mail.com'
                 git branch: "${params.BRANCH_TO_BUILD}",
                     url: 'https://github.com/sashi3333/spring-petclinic.git'
