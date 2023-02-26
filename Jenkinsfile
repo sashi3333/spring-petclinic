@@ -5,10 +5,17 @@ pipeline{
         string(name: 'MAVEN_GOAL', defaultValue: 'package', description: 'maven goal')
         
     }
+    triggers{
 
+        pollscm('* * * * *')
+        
+    }
     stages{
         stage('vcs'){
             steps {
+                mail subject: 'Build Started', 
+                    body: 'Build started',
+                    to: 'sashidhar3333@mail.com'
                 git branch: "${params.BRANCH_TO_BUILD}",
                     url: 'https://github.com/sashi3333/spring-petclinic.git'
             }
@@ -22,6 +29,20 @@ pipeline{
             steps{
                 junit '**/surefire-reports/*.xml'
             }
+        }
+    }
+
+    post {
+        always{
+            echo 'Job completed'
+        }
+        failure{
+            mail subject: 'Build Failure', 
+                 body: 'Build failed',
+                 to: 'sashidhar3333@mail.com'
+        }
+        success{
+            junit '**/surefire-reports/*.xml'
         }
     }
 }
