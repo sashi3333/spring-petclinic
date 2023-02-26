@@ -35,6 +35,9 @@ pipeline{
     post {
         always{
             echo "Job completed for Jenkins JOB $env.JOB_NAME"
+             mail subject: "Build started for Jenkins JOB $env.JOB_NAME", 
+                  body: "Build started for Jenkins JOB $env.JOB_NAME /n Click here: $env.JOB_URL",
+                  to: 'sashidhar3333@mail.com'
         }
         failure{
             mail subject: "Build Failure for Jenkins JOB $env.JOB_NAME", 
